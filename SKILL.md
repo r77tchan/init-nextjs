@@ -89,62 +89,7 @@ npm install -D prettier prettier-plugin-tailwindcss
 
 追加後、`npm run typecheck` がエラーなく実行できることを確認する。
 
-## 6. AGENTS.md にルールを追記
-
-`AGENTS.md` の末尾（既存の `<!-- END:nextjs-agent-rules -->` 行の下）に、以下の内容を追記する。
-
-```markdown
-## 作業の進め方
-
-依頼を受けたら、まず調査・整理・プラン提示を行うこと。
-編集・実装は、明示的な指示（「実装して」「修正して」「進めて」等）を受けてから着手する。
-
-- 質問・依頼の意図が曖昧な場合は、勝手に判断せず確認する
-- 「〇〇を直したい」のような相談形式の発言は、調査・提案までに留める
-- 「ついでに」「念のため」で範囲外の編集をしない
-
-## 進行ルール
-
-承認は不要だが、現状と次の行動をこまめに報告すること。
-
-- ツール実行の前に、何をするか一文で述べる
-- 想定外の結果（エラー、予期しない出力）が出たら、即報告してから次に進む
-- 複数ステップの作業では、節目ごとに「ここまで完了、次はX」と一言入れる
-- 冗長な報告は避け、節目ごとに留める
-
-## 変更後の検証
-
-コードを変更したら、ターンを終える前に以下を必ず実行する。
-
-- `npm run lint`
-- `npm run typecheck`
-
-エラーがあれば内容を報告してから修正に着手する。
-```
-
-## 7. `.claude/settings.json` の作成
-
-プロジェクトルートに `.claude/settings.json` を作成し、以下の内容を書き込む。
-
-```json
-{
-  "hooks": {
-    "PostToolUse": [
-      {
-        "matcher": "Edit|Write|MultiEdit",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "FILE=$(jq -r '.tool_input.file_path // empty'); [ -n \"$FILE\" ] && npx --no-install prettier --write --ignore-unknown \"$FILE\" >/dev/null 2>&1 || true"
-          }
-        ]
-      }
-    ]
-  }
-}
-```
-
-## 8. コミット
+## 6. コミット
 
 ここまでの変更をコミットする。リモートリポジトリの作成や push は行わない。
 
@@ -153,6 +98,6 @@ git add -A
 git commit -m "init project"
 ```
 
-## 9. セッション再起動の案内
+## 7. セッション再起動の案内
 
 行った内容を報告し、設定反映の為、ユーザーに **Claude Code セッションの再起動** を促す。

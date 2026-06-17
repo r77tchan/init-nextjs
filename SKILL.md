@@ -79,6 +79,18 @@ npm install -D prettier prettier-plugin-tailwindcss
 }
 ```
 
+`package.json` の `scripts` セクションに以下のエントリを追加する。
+
+```json
+"format": "prettier --write ."
+```
+
+追加後、プロジェクト全体にフォーマットをかける。
+
+```sh
+npm run format
+```
+
 ## 5. `package.json` に typecheck script を追加
 
 `package.json` の `scripts` セクションに以下のエントリを追加する。
